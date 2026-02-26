@@ -284,8 +284,33 @@ cp -r data/images/* data/seed/images/
 
 ## References
 
-- Kozinets, R. V. (2015). *Netnography: Redefined*. SAGE Publications.
-- Original study: [AOC-vs-Trump-Twitter-Analysis](https://github.com/ayrtondenner/AOC-vs-Trump-Twitter-Analysis)
+### Netnography & Methodology
+
+- Kozinets, R. V. (2015). *Netnography: Redefined* (2nd ed.). SAGE Publications.
+- Kozinets, R. V. (2020). *Netnography: The Essential Guide to Qualitative Social Media Research* (3rd ed.). SAGE Publications. [(SAGE)](https://uk.sagepub.com/en-gb/eur/netnography/book260905)
+- Rheingold, H. (2000). *The Virtual Community: Homesteading on the Electronic Frontier* (Revised ed.). MIT Press. [(MIT Press)](https://direct.mit.edu/books/book/2147/The-Virtual-CommunityHomesteading-on-the)
+
+### Political Communication on Social Media (English)
+
+- Barberá, P. (2015). Birds of the Same Feather Tweet Together: Bayesian Ideal Point Estimation Using Twitter Data. *Political Analysis*, 23(1), 76–91. [(DOI)](https://doi.org/10.1093/pan/mpu011)
+- Jungherr, A. (2016). Twitter Use in Election Campaigns: A Systematic Literature Review. *Journal of Information Technology & Politics*, 13(1), 72–91. [(DOI)](https://doi.org/10.1080/19331681.2015.1132401)
+- Bode, L., & Dalrymple, K. E. (2016). Politics in 140 Characters or Less: Campaign Communication, Network Interaction, and Political Participation on Twitter. *Journal of Political Marketing*, 15(4), 311–332. [(DOI)](https://doi.org/10.1080/15377857.2014.959686)
+
+### Sentiment Analysis & Digital Discourse
+
+- Liu, B. (2015). *Sentiment Analysis: Mining Opinions, Sentiments, and Emotions*. Cambridge University Press. [(Cambridge)](https://www.cambridge.org/core/books/sentiment-analysis/3F0F24BE12E66764ACE8F179BCDA42E9)
+
+### Netnografia e Comunicação Política (Português)
+
+- Amaral, A., Natal, G., & Viana, L. (2008). Netnografia como aporte metodológico da pesquisa em comunicação digital. *Sessões do Imaginário*, (20), 34–40. [(PUC-RS)](https://revistaseletronicas.pucrs.br/famecos/article/view/4829)
+- Recuero, R. (2009). *Redes Sociais na Internet*. Sulina. [(PDF)](http://www.raquelrecuero.com/livros/redes_sociais_na_internet.pdf)
+- Recuero, R. (2014). *A Conversação em Rede: Comunicação Mediada pelo Computador e Redes Sociais na Internet* (2ª ed.). Sulina. [(Editora Sulina)](https://www.editorasulina.com.br/detalhes.php?id=574)
+- Ituassu, A., & Lifschitz, S. (2015). Temas e Mídia em #Eleições2014: Twitter, opinião pública e comunicação política no contexto eleitoral brasileiro. *E-Compós*, 18(2), 1–19. [(DOI)](https://doi.org/10.30962/ec.1196)
+- Recuero, R., Zago, G., & Soares, F. (2017). Mídia Social e Filtros-Bolha nas Conversações Políticas no Twitter. *Anais do XXVI Encontro Anual da Compós*. [(Compós)](https://proceedings.science/compos/compos-2017/trabalhos/midia-social-e-filtros-bolha-nas-conversacoes-politicas-no-twitter?lang=pt-br)
+
+### Original Study
+
+- [AOC-vs-Trump-Twitter-Analysis](https://github.com/ayrtondenner/AOC-vs-Trump-Twitter-Analysis)
 
 ## License
 
