@@ -1,0 +1,34 @@
+# Twitter/X data collection
+twikit>=2.3.0
+cryptography>=41.0.0
+
+# Data processing
+pandas>=2.0.0
+numpy>=1.24.0
+
+# Visualization
+matplotlib>=3.7.0
+
+# Embeddings & dimensionality reduction (2D tweet map)
+openai>=1.0.0
+scikit-learn>=1.3.0
+
+# Image analysis
+Pillow>=10.0.0
+
+# Async HTTP (image downloads)
+httpx>=0.25.0
+
+# Jupyter
+jupyter>=1.0.0
+notebook>=7.0.0
+ipykernel>=6.0.0
+
+# Environment / configuration
+python-dotenv>=1.0.0
+
+# Progress bars
+tqdm>=4.65.0
+
+# Async support (needed for twikit in scripts, notebooks)
+nest-asyncio>=1.5.0

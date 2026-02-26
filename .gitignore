@@ -1,0 +1,35 @@
+# Virtual environment
+venv/
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+dist/
+build/
+
+# Environment variables / secrets
+.env
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Data (raw and processed - generated/large files)
+data/raw/
+data/processed/
+data/images/
+
+# But allow seed data to be committed
+!data/seed/
+!data/seed/**
+
+# Twikit cookies (contain session tokens)
+cookies.json
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
