@@ -8,6 +8,10 @@ numpy>=1.24.0
 
 # Visualization
 matplotlib>=3.7.0
+seaborn>=0.12.0
+
+# Network analysis
+networkx>=3.1
 
 # Embeddings & dimensionality reduction (2D tweet map)
 openai>=1.0.0

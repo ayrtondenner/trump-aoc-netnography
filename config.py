@@ -62,6 +62,19 @@ LABELS = {
         "media_type": "Media Type",
         "sentiment": "Sentiment",
         "day_names": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+        # Community analysis
+        "community_clusters": "Community Clusters",
+        "user_archetype": "User Archetype",
+        "supporter": "Supporter",
+        "critic": "Critic",
+        "troll": "Potential Troll",
+        "bot_suspect": "Potential Bot",
+        "casual": "Casual Commenter",
+        "influencer": "Influencer Replier",
+        "bridge_user": "Bridge User",
+        "network_centrality": "Network Centrality",
+        "engagement_evolution": "Engagement Evolution",
+        "reply_network": "Reply Network",
     },
     "pt-br": {
         "trump": "Trump (@realDonaldTrump)",
@@ -82,7 +95,29 @@ LABELS = {
         "media_type": "Tipo de Mídia",
         "sentiment": "Sentimento",
         "day_names": ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado", "Domingo"],
+        # Community analysis
+        "community_clusters": "Clusters de Comunidade",
+        "user_archetype": "Arquétipo de Usuário",
+        "supporter": "Apoiador",
+        "critic": "Crítico",
+        "troll": "Troll em Potencial",
+        "bot_suspect": "Possível Bot",
+        "casual": "Comentarista Casual",
+        "influencer": "Influenciador",
+        "bridge_user": "Usuário Ponte",
+        "network_centrality": "Centralidade na Rede",
+        "engagement_evolution": "Evolução do Engajamento",
+        "reply_network": "Rede de Respostas",
     },
+}
+
+ARCHETYPE_COLORS = {
+    "supporter": "#2ECC71",
+    "critic": "#E74C3C",
+    "troll": "#9B59B6",
+    "bot_suspect": "#95A5A6",
+    "casual": "#3498DB",
+    "influencer": "#F39C12",
 }
 
 FIGURE_SIZE = (12, 6)
