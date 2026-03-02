@@ -6,6 +6,7 @@
 ![OpenAI](https://img.shields.io/badge/OpenAI-Embeddings-412991?logo=openai&logoColor=white)
 ![Jupyter](https://img.shields.io/badge/Jupyter-Notebook-F37626?logo=jupyter&logoColor=white)
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-PCA-F7931E?logo=scikit-learn&logoColor=white)
+![NetworkX](https://img.shields.io/badge/NetworkX-Graph_Analysis-orange)
 ![Pillow](https://img.shields.io/badge/Pillow-Image_Analysis-blue)
 ![License](https://img.shields.io/badge/License-Academic-green)
 
@@ -39,16 +40,28 @@ flowchart LR
         J --> L["replies.csv\nsentiment + timing"]
     end
 
+    subgraph Community["03_enrich_community.py"]
+        L --> O[User Profiling]
+        L --> P[Network Analysis]
+        O --> Q["user_profiles.csv\narchetypes + clusters"]
+        P --> R["mention_network.csv\nweighted edges"]
+    end
+
     subgraph Analysis["Jupyter Notebooks"]
-        K --> M["5 Notebooks EN"]
-        K --> N["5 Notebooks PT-BR"]
+        K --> M["6 Notebooks EN"]
+        K --> N["6 Notebooks PT-BR"]
         L --> M
         L --> N
+        Q --> M
+        Q --> N
+        R --> M
+        R --> N
     end
 
     style Collection fill:#E8F4FD,stroke:#2196F3
     style Storage fill:#FFF3E0,stroke:#FF9800
     style Enrichment fill:#E8F5E9,stroke:#4CAF50
+    style Community fill:#E0F7FA,stroke:#00BCD4
     style Analysis fill:#F3E5F5,stroke:#9C27B0
 ```
 
@@ -76,6 +89,18 @@ flowchart TD
         SENT --> REPOUT
         RDEM --> REPOUT
     end
+
+    subgraph Community_Pipeline["Community Enrichment"]
+        REPOUT --> UP["User Profile Aggregation"]
+        REPOUT --> MN["Mention Network Extraction"]
+        UP --> ARCH["Archetype Classification"]
+        UP --> CLUST["KMeans Clustering"]
+        ARCH --> UPOUT["user_profiles.csv"]
+        CLUST --> UPOUT
+        MN --> MNOUT["mention_network.csv"]
+    end
+
+    style Community_Pipeline fill:#E0F7FA
 
     style RAW fill:#FFECB3
     style OUT fill:#C8E6C9
@@ -122,6 +147,7 @@ flowchart TD
 trump-aoc-netnography/
 ├── 01_collect_data.py          # Async scraper: tweets + replies + images
 ├── 02_enrich_data.py           # Feature engineering: 30+ computed columns
+├── 03_enrich_community.py      # Community profiling: archetypes, networks, clusters
 ├── export_cookies.py           # Multi-browser cookie extraction utility
 ├── config.py                   # Centralized constants, paths, color palette
 ├── data/
@@ -132,8 +158,8 @@ trump-aoc-netnography/
 │   ├── processed/              # Enriched CSV + embeddings (gitignored)
 │   └── seed/                   # Fixed snapshot for reproducibility
 ├── notebooks/
-│   ├── en/                     # English analysis (5 notebooks)
-│   └── pt-br/                  # Portuguese translations (5 notebooks)
+│   ├── en/                     # English analysis (6 notebooks)
+│   └── pt-br/                  # Portuguese translations (6 notebooks)
 ├── utils/
 │   ├── data_loader.py          # Auto-resolves processed vs seed data
 │   ├── plot_helpers.py         # Matplotlib styling + EN/PT-BR label switching
@@ -152,6 +178,7 @@ trump-aoc-netnography/
 | 3 | **Content & Discourse** | Word frequency, hashtags, topics, **2D tweet map** | NLP, keyword classification, **OpenAI embeddings + PCA** |
 | 4 | **Community Response** | Reply threads, sentiment, replier demographics | Sentiment analysis, timing analysis, demographic profiling |
 | 5 | **Visual Analysis** | Image properties, color palettes, visual rhetoric | PIL brightness/color extraction, engagement correlation |
+| 6 | **Deep Community Analysis** | Network topology, user archetypes, echo chambers, longitudinal behavior | NetworkX graphs, PageRank centrality, KMeans clustering, archetype classification |
 
 All notebooks are written in **accessible language** for history students (no statistical jargon without explanation) and include "What does this tell us?" interpretation cells after every chart.
 
@@ -160,6 +187,7 @@ All notebooks are written in **accessible language** for history students (no st
 - **Web Scraping**: Async Python with `twikit`, cookie-based authentication, rate limiting with exponential backoff, partial-save on interrupt
 - **ETL Pipeline**: Data lake (raw JSON) → Data warehouse (enriched CSV) pattern with validation assertions
 - **NLP**: OpenAI embeddings (`text-embedding-3-small`), PCA dimensionality reduction, keyword extraction, keyword-based sentiment classification
+- **Network Analysis**: NetworkX graph construction, PageRank centrality, community detection, mention network mapping
 - **Data Visualization**: 50+ Matplotlib charts with consistent styling, bilingual label system, professional formatting
 - **Image Analysis**: Pillow-based brightness, color channel, and dimension analysis of tweet images
 - **Browser Engineering**: Cross-browser cookie extraction (Firefox SQLite, Chrome DPAPI/AES-GCM, Edge, interactive fallback)
@@ -207,7 +235,10 @@ python 01_collect_data.py
 # Step 3: Enrich raw data into analysis-ready CSVs
 python 02_enrich_data.py
 
-# Step 4: Open analysis notebooks
+# Step 4: Build community profiles, networks, and archetypes
+python 03_enrich_community.py
+
+# Step 5: Open analysis notebooks
 jupyter notebook notebooks/en/   # English
 jupyter notebook notebooks/pt-br/  # Portuguese
 ```
@@ -234,7 +265,10 @@ python 01_collect_data.py
 # 4. Re-enrich the data (overwrites data/processed/)
 python 02_enrich_data.py
 
-# 5. Run notebooks (embeddings will be regenerated on first run of notebook 03)
+# 5. Re-build community profiles and networks
+python 03_enrich_community.py
+
+# 6. Run notebooks (embeddings will be regenerated on first run of notebook 03)
 jupyter notebook notebooks/en/
 
 # To run all notebooks non-interactively (verify they execute without errors):
@@ -243,6 +277,7 @@ jupyter nbconvert --to notebook --execute notebooks/en/02_engagement_analysis.ip
 jupyter nbconvert --to notebook --execute notebooks/en/03_content_analysis.ipynb
 jupyter nbconvert --to notebook --execute notebooks/en/04_comments_analysis.ipynb
 jupyter nbconvert --to notebook --execute notebooks/en/05_visual_analysis.ipynb
+jupyter nbconvert --to notebook --execute notebooks/en/06_community_deep_analysis.ipynb
 ```
 
 **Common issues when re-running:**
@@ -269,6 +304,7 @@ cp -r data/images/* data/seed/images/
 | Cookie Auth | sqlite3, ctypes (DPAPI), cryptography | Cross-browser cookie extraction |
 | Processing | Pandas, NumPy | Data transformation, feature engineering |
 | NLP | OpenAI API, scikit-learn | Embeddings, PCA, text vectorization |
+| Network Analysis | NetworkX | Graph construction, PageRank, community detection |
 | Visualization | Matplotlib | 50+ charts, bilingual labels |
 | Image Analysis | Pillow (PIL) | Brightness, color, dimensions |
 | Environment | python-dotenv, tqdm | Config management, progress bars |

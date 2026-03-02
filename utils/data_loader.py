@@ -107,6 +107,55 @@ def load_raw_tweets(source: str = "auto") -> dict[str, list[dict]]:
     return result
 
 
+def load_user_profiles(source: str = "auto") -> pd.DataFrame:
+    """Load the user profiles DataFrame.
+
+    Args:
+        source: "auto" (try processed, then seed), "processed", or "seed".
+
+    Returns:
+        DataFrame with one row per unique replier.
+    """
+    data_dir = _resolve_source(source)
+    path = data_dir / "user_profiles.csv"
+    if not path.exists():
+        raise FileNotFoundError(
+            "user_profiles.csv not found. Run 03_enrich_community.py first."
+        )
+    df = pd.read_csv(path)
+
+    for col in ["first_reply_at", "last_reply_at"]:
+        if col in df.columns:
+            df[col] = pd.to_datetime(df[col], utc=True)
+    if "archetype" in df.columns:
+        df["archetype"] = df["archetype"].astype("category")
+    if "dominant_sentiment" in df.columns:
+        df["dominant_sentiment"] = df["dominant_sentiment"].astype("category")
+
+    print(f"Loaded {len(df)} user profiles from {data_dir.name}/")
+    return df
+
+
+def load_mention_network(source: str = "auto") -> pd.DataFrame:
+    """Load the mention network edge list.
+
+    Args:
+        source: "auto" (try processed, then seed), "processed", or "seed".
+
+    Returns:
+        DataFrame with weighted mention edges.
+    """
+    data_dir = _resolve_source(source)
+    path = data_dir / "mention_network.csv"
+    if not path.exists():
+        raise FileNotFoundError(
+            "mention_network.csv not found. Run 03_enrich_community.py first."
+        )
+    df = pd.read_csv(path)
+    print(f"Loaded {len(df)} mention edges from {data_dir.name}/")
+    return df
+
+
 def get_images_dir(source: str = "auto") -> Path:
     """Get the appropriate images directory based on data source."""
     if source == "processed" or source == "auto":
